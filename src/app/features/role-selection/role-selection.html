@@ -1,0 +1,25 @@
+<div class="flex flex-col items-center justify-center h-screen w-screen bg-[#020202]">
+  <div class="flex flex-col items-center gap-3 mb-16">
+    <h1 class="text-5xl font-bold text-[#EEEEEE] tracking-tight">Health Dashboard</h1>
+    <p class="text-lg text-[#8F8F8F]">Select your role to get started</p>
+  </div>
+  <div class="flex flex-row items-center gap-4">
+    @for (role of roles; track $index) {
+    <div
+      class="flex flex-col items-center p-8 overflow-hidden rounded-xl bg-[#060606] border border-[#121212] cursor-pointer hover:border-[#008d9b] hover:bg-[#060606]/50"
+      (click)="onRoleSelect(role)">
+      <div class="flex items-center justify-center p-3 bg-[#008d9b]/20 rounded-lg mb-4">
+        <svg appIcon class="close-icon" [name]="role.icon" size="24" color="#008d9b"></svg>
+      </div>
+      <h2 class="text-2xl font-semibold text-[#EEEEEE] mb-2">{{ role.name }}</h2>
+      <p class="text-sm text-[#8F8F8F] mb-6">{{ role.desc }}</p>
+      <button matButton>
+        <div class="flex flex-row gap-2 items-center">
+          <span>Enter Dashboard</span>
+          <svg appIcon class="close-icon" name="arrowRight" size="16"></svg>
+        </div>
+      </button>
+    </div>
+    }
+  </div>
+</div>

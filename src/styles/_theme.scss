@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+$primary: mat.define-theme((color: (theme-type: light,
+        primary: mat.$cyan-palette,
+        tertiary: mat.$green-palette,
+      ),
+      typography: (brand-family: 'Inter, Roboto, Arial, sans-serif',
+        plain-family: 'Inter, Roboto, Arial, sans-serif',
+      ),
+      density: (scale: 0,
+      )));
+
+html {
+  @include mat.all-component-themes($primary);
+}
