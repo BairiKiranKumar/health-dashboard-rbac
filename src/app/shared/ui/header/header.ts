@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RoleService } from '../../services/role.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { IconDirective } from '../../directives/icon.directive';
   styleUrl: './header.scss',
 })
 export class Header {
+  subHeading = input<string>('');
   private roleService = inject(RoleService);
   private router = inject(Router);
 
