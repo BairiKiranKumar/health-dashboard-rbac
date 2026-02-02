@@ -1,8 +1,10 @@
 @use '@angular/material' as mat;
 
-$primary: mat.define-theme((color: (theme-type: light,
+$theme: mat.define-theme((color: (theme-type: light,
         primary: mat.$cyan-palette,
         tertiary: mat.$green-palette,
+        use-system-variables: true,
+        system-variables-prefix: app,
       ),
       typography: (brand-family: 'Inter, Roboto, Arial, sans-serif',
         plain-family: 'Inter, Roboto, Arial, sans-serif',
@@ -11,5 +13,24 @@ $primary: mat.define-theme((color: (theme-type: light,
       )));
 
 html {
-  @include mat.all-component-themes($primary);
+  @include mat.all-component-themes($theme);
+}
+
+@theme {
+  --color-primary: #006064;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #455a64;
+  --color-secondary-foreground: #ffffff;
+
+  --color-tertiary: #2e7d32;
+  --color-tertiary-foreground: #ffffff;
+
+  --color-background: #f8fafb;
+  --color-foreground: #1c1b1f;
+
+  --color-surface: #ffffff;
+  --color-surface-foreground: #1c1b1f;
+
+  --color-border: #d0d5dd;
 }

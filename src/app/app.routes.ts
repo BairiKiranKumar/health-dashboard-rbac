@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { roleGuard } from './shared/gaurds/role.gaurd';
+import { roleGuard } from './core/gaurds/role.gaurd';
+import { patientsResolver } from './core/resolvers/patients-resolver';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/dashboard-shell/dashboard-shell').then((m) => m.DashboardShell),
     canActivate: [roleGuard],
+    resolve: {
+      patients: patientsResolver,
+    },
   },
   {
     path: '**',

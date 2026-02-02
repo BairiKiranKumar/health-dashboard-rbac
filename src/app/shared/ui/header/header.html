@@ -1,11 +1,17 @@
-<div class="flex items-center justify-between max-auto px-6 py-4 border-[grey] border-b h-[60px]">
-  <div class="flex flex-col ga-2">
-    <h1 class="text-2xl font-bold text-[#020202] tracking-tight">Health Dashboard</h1>
-    @if (subHeading() !== '') {
-    <p class="text-sm text-[#8F8F8F]">{{ subHeading() }}</p>
-    }
+<div class="flex items-center justify-between max-auto px-6 py-4 bg-surface border-border border-b h-[80px]">
+  <div class="flex flex-row gap-2 items-center">
+    <div class="flex items-center justify-center p-3 bg-[#008d9b]/20 rounded-lg">
+      <svg appIcon class="close-icon" [name]="role() === 'doctor' ? 'stethoscope' : 'clipboard'" size="24"
+        color="#008d9b"></svg>
+    </div>
+    <div class="flex flex-col ga-2">
+      <h1 class="text-2xl font-bold text-foreground tracking-tight">Healthcare Dashboard</h1>
+      @if (role() !== '') {
+      <p class="text-sm text-foreground/70">{{ subHeading() }}</p>
+      }
+    </div>
   </div>
-  <button mat-button (click)="onSwitchRoleClick()">
+  <button (click)="onSwitchRoleClick()" matButton>
     <div class="flex flex-row gap-2 items-center">
       <svg appIcon class="close-icon" name="logOut" size="24"></svg>
       <span>Switch Role</span>

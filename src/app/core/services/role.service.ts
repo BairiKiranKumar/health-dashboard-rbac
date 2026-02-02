@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { UserRole } from '../models/roles.model';
+import { UserRole } from '../../shared/models/roles.model';
 
 const STORAGE_KEY = 'app_role';
 
