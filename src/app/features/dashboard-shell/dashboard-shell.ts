@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RoleService } from '../../shared/services/role.service';
+import { RoleService } from '../../core/services/role.service';
 import { DoctorDashboard } from './doctor-dashboard/doctor-dashboard';
 import { ReceptionistDashboard } from './receptionist-dashboard/receptionist-dashboard';
 

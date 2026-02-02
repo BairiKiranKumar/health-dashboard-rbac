@@ -3,7 +3,7 @@ import { IconDirective } from '../../shared/directives/icon.directive';
 import { IconName } from '../../../assets/icon';
 import { Material } from '../../shared/ui/material';
 import { UserRole } from '../../shared/models/roles.model';
-import { RoleService } from '../../shared/services/role.service';
+import { RoleService } from '../../core/services/role.service';
 import { Router } from '@angular/router';
 
 type DashboardRole = {

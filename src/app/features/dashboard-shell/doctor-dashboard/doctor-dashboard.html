@@ -1,9 +1,67 @@
-<div class="flex flex-col w-screen h-screen">
-  <header subHeading="Doctor Portal"></header>
-  <div class="flex flex-col w-full mx-auto px-6 py-8">
-    <div class="flex flex-col border rounded-xl p-8">
-      <h3 class="text-2xl font-bold mb-2">Welcome back, Dr. Sarah Chen</h3>
-      <p class="">4 patients scheduled for today</p>
+<div class="flex flex-col w-screen h-screen overflow-hidden">
+  <header [role]="'doctor'"></header>
+  <div class="flex flex-col py-8">
+    <div class="flex flex-col bg-white rounded-2xl shadow-sm mx-6 p-8">
+      <h2 class="text-2xl font-bold mb-3">Welcome back, Dr. Sarah Chen</h2>
+      <div class="flex flex-row items-center gap-4">
+        <mat-form-field appearance="outline" class="example-full-width flex-1">
+          @if (searchText.length === 0) {
+          <mat-icon matPrefix>
+            <svg appIcon name="search" size="24" class="ms-[10px]"></svg>
+          </mat-icon>
+          }
+          <input type="tel" matInput placeholder="Search" [(ngModel)]="searchText">
+          @if (searchText.length > 0) {
+          <mat-icon matSuffix>
+            <svg appIcon name="close" size="24" class="me-[10px]"></svg>
+          </mat-icon>
+          }
+        </mat-form-field>
+        <mat-chip-listbox class="mat-mdc-chip-set-stacked mb-[20px]" style="--mat-sys-on-surface: #008d9b">
+          <mat-chip-option [selected]="showPagination()" [disabled]="showPagination()"
+            (click)="showPagination.set(true)">Show
+            Pagination</mat-chip-option>
+          <mat-chip-option [selected]="!showPagination()" [disabled]="!showPagination()"
+            (click)="showPagination.set(false)">Hide
+            Pagination</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </div>
+    <div class="flex flex-col border-t border-border mt-8">
+      <div class="flex flex-col gap-5 px-6 bg-background py-3 overflow-y-auto"
+        [style.height]="showPagination() ? 'calc(100vh - 400px)' : 'calc(100vh - 330px)'">
+        @for (patient of filteredPatients; track patient.id) {
+        <div class="flex flex-row gap-4 p-2 bg-white border rounded-2xl shadow-sm">
+          @if (patient.photo !== '') {
+          <img [src]="patient.photo" alt="patient image" class="w-10 h-10 rounded-full">
+          } @else {
+          <span class="w-10 h-10 rounded-full border bg-white"></span>
+          }
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-semibold">{{ patient.name }}</h3>
+            <div class="flex flex-row items-center gap-2">
+              <span class="text-sm text-gray-600 border-r border-gray-200 pr-2">{{ patient.age }} years old</span>
+              <span class="text-sm text-gray-600 border-r border-gray-200 pr-2">{{ patient.gender }}</span>
+              <span class="text-sm text-gray-600">{{ patient.id }}</span>
+            </div>
+            <div class="flex flex-row items-center gap-2">
+              <span class="text-sm text-gray-600 border-r border-gray-200 pr-2">Last Visit: {{
+                getLastVisitDays(patient.lastVisit) }} days ago</span>
+              @if (patient.nextAppointment) {
+              <span class="text-sm text-blue-600 border-r border-gray-200 pr-2">Next Appointment: {{
+                patient.nextAppointment | date:'short' }}</span>
+              }
+              <span class="text-sm text-gray-600 border-r border-gray-200 pr-2">{{ patient.condition }}</span>
+              <span class="text-sm text-gray-600 px-2 py-1 rounded-xl {{ getPatientStatus(patient.status) }}">{{
+                patient.status }}</span>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      @if (showPagination()) {
+      <div class="flex px-8 py-4 bg-white border-t border-gray-200"></div>
+      }
     </div>
   </div>
 </div>

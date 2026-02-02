@@ -1,8 +1,8 @@
-import { Component, inject, input } from '@angular/core';
-import { RoleService } from '../../services/role.service';
+import { Component, computed, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { IconDirective } from '../../directives/icon.directive';
+import { RoleService } from '../../../core/services/role.service';
 
 @Component({
   selector: 'header',
@@ -11,9 +11,15 @@ import { IconDirective } from '../../directives/icon.directive';
   styleUrl: './header.scss',
 })
 export class Header {
-  subHeading = input<string>('');
+  role = input<string>('');
   private roleService = inject(RoleService);
   private router = inject(Router);
+
+  subHeading = computed<string>(() => {
+    return this.role() === 'doctor'
+      ? 'Patient Management System'
+      : 'Appointment & Reception Management';
+  });
 
   onSwitchRoleClick() {
     this.roleService.clearRole();
