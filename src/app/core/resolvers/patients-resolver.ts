@@ -16,9 +16,9 @@ export const patientsResolver: ResolveFn<Patient[] | null> = () => {
   }
 
   const snackRef = snackBar.open(
-    'Dashboard will load in 5 seconds (simulating API response)',
+    'Dashboard will load in 2 seconds (simulating API response)',
     'Close',
-    { duration: 5000 },
+    { duration: 2000 },
   );
 
   return from(patientService.loadPatientsPromise()).pipe(finalize(() => snackRef.dismiss()));

@@ -1,5 +1,4 @@
 @use './styles/theme';
-@use './styles/colors';
 @import "tailwindcss";
 
 html,
@@ -10,4 +9,9 @@ body {
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
+}
+
+:root {
+  --mat-sys-surface-container: #FFF;
+  --mat-icon-button-disabled-icon-color: #EEE;
 }

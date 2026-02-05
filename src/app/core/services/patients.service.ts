@@ -24,7 +24,7 @@ export class PatientsService {
   }
 
   async loadPatientsPromise(): Promise<Patient[]> {
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     try {
       return await firstValueFrom(this.getPatients(1, 20));
