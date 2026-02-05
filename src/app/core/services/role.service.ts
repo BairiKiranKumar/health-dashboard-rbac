@@ -11,17 +11,17 @@ export class RoleService {
   readonly role$ = this.role.asReadonly();
 
   private loadRole(): UserRole | null {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || 'null');
   }
 
   setRole(role: UserRole) {
     this.role.set(role);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(role));
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(role));
   }
 
   clearRole() {
     this.role.set(null);
-    localStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(STORAGE_KEY);
   }
 
   hasRole(): boolean {
