@@ -5,9 +5,7 @@ import {
   ElementRef,
   inject,
   OnInit,
-  QueryList,
   signal,
-  viewChild,
   viewChildren,
 } from '@angular/core';
 import { Header } from '../../../shared/ui/header/header';
@@ -86,10 +84,16 @@ export class DoctorDashboard implements OnInit {
     if (!value) {
       this.pageIndex.set(0);
       this.pageSize.set(20);
+    } else {
+      this.setupIntersectionObserver(true);
+      this.pageSize.set(20);
+      this.isLoading.set(false);
     }
   }
 
-  setupIntersectionObserver() {
+  setupIntersectionObserver(removeObserver = false) {
+    if (this.showPagination()) return;
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         this.loadMoreRecords();
@@ -100,15 +104,17 @@ export class DoctorDashboard implements OnInit {
     const lastEl = patientCardsArray[patientCardsArray.length - 1]?.nativeElement;
 
     observer.observe(lastEl);
+
+    if (removeObserver) {
+      observer.unobserve(lastEl);
+    }
   }
 
   loadMoreRecords() {
     this.isLoading.set(true);
     const size = 20;
-    setTimeout(() => {
-      this.pageSize.update((s: number) => s + size);
-      this.isLoading.set(false);
-    }, 2000);
+    this.pageSize.update((s: number) => s + size);
+    this.isLoading.set(false);
   }
 
   getLastVisitDays(lastVisit: string) {
